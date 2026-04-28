@@ -20,3 +20,6 @@ class MeView(APIView):
             "email": user.email,
             "is_staff": user.is_staff,
         })
+    
+
+
