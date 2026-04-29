@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Announcement
+from .models import Announcement, Category
 
 class AnnouncementSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
@@ -7,3 +7,10 @@ class AnnouncementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Announcement
         fields = '__all__'
+
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = "__all__"

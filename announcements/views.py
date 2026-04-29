@@ -6,6 +6,9 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 from rest_framework.viewsets import ModelViewSet
 from .permissions import IsAdminOrReadOnly  
+from rest_framework.viewsets import ModelViewSet
+from .models import Category
+from .serializers import CategorySerializer
 
 class AnnouncementListCreateView(generics.ListCreateAPIView):
     queryset = Announcement.objects.filter(is_active=True).order_by('-created_at')
@@ -44,4 +47,6 @@ class AnnouncementViewSet(ModelViewSet):
 
 
 
-    
+class CategoryViewSet(ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
