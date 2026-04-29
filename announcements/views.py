@@ -39,4 +39,9 @@ class IsAdminOrReadOnly(BasePermission):
 class AnnouncementViewSet(ModelViewSet):
     queryset = Announcement.objects.all()
     serializer_class = AnnouncementSerializer
-    permission_classes = [IsAdminOrReadOnly]   # 👈 THIS is the key line
+    permission_classes = [IsAdminOrReadOnly]   # 👈 THIS is the key lin
+
+
+
+
+    
