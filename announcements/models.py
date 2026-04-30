@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.functions import Lower
 from django.conf import settings
 
 User = settings.AUTH_USER_MODEL
@@ -7,8 +8,13 @@ User = settings.AUTH_USER_MODEL
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.name
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                Lower('name'),
+                name='unique_category_name_case_insensitive'
+            )
+        ]
 
 
 class Announcement(models.Model):
@@ -27,6 +33,11 @@ class Announcement(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     image = models.ImageField(upload_to="announcements/", blank=True, null=True)
+
+
+
+
+
 
     def __str__(self):
         return self.title
