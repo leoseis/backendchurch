@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Announcement, Category
+from .models import Announcement, Category,Comment
 
 
 @admin.register(Announcement)
@@ -20,6 +20,12 @@ class AnnouncementAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
+
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ("author", "announcement", "created_at")
 
 
 

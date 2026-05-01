@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Announcement, Category
+from .models import Announcement, Category,Comment
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -8,14 +8,21 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ["id", "name"]
 
 
+
+class CommentSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = ['id', 'announcement', 'author', 'content', 'created_at']
+
+
 class AnnouncementSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
-    category_id = serializers.PrimaryKeyRelatedField(
-        queryset=Category.objects.all(),
-        source="category",
-        write_only=True
-    )
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Announcement
-        fields = "__all__"
+        fields = '__all__'
+
+
+
