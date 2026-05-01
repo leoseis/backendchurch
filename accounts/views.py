@@ -20,6 +20,18 @@ class MeView(APIView):
             "email": user.email,
             "is_staff": user.is_staff,
         })
+
+
+
+
+class MeView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({
+            "username": request.user.username,
+            "is_staff": request.user.is_staff,
+        })
     
 
 
