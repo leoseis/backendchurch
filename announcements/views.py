@@ -1,63 +1,36 @@
-from rest_framework import generics
-from .models import Announcement
-from .serializers import AnnouncementSerializer
-from .permissions import IsAdminOrReadOnly
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.permissions import BasePermission, SAFE_METHODS
 from rest_framework.viewsets import ModelViewSet
-from .permissions import IsAdminOrReadOnly  
-from rest_framework.viewsets import ModelViewSet
-from .models import Category
-from .serializers import CategorySerializer
+from rest_framework.permissions import BasePermission, SAFE_METHODS, AllowAny
 from rest_framework import generics, permissions
-from .models import Comment
-from .serializers import CommentSerializer
-
-class AnnouncementListCreateView(generics.ListCreateAPIView):
-    queryset = Announcement.objects.filter(is_active=True).order_by('-created_at')
-    serializer_class = AnnouncementSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly & IsAdminOrReadOnly]
-
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+from .models import Announcement, Category, Comment
+from .serializers import AnnouncementSerializer, CategorySerializer, CommentSerializer
 
 
-class AnnouncementDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Announcement.objects.all()
-    serializer_class = AnnouncementSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly & IsAdminOrReadOnly]
-
-
-
-
-
+# 🔐 Custom Permission (BEST PRACTICE)
 class IsAdminOrReadOnly(BasePermission):
     def has_permission(self, request, view):
-        # Allow GET, HEAD, OPTIONS (read-only)
+        # ✅ Anyone can READ
         if request.method in SAFE_METHODS:
             return True
         
-        # Only admin (staff) can modify
+        # 🔒 Only admin can WRITE
         return request.user and request.user.is_staff
-    
 
 
+# 📢 Announcements
 class AnnouncementViewSet(ModelViewSet):
-    queryset = Announcement.objects.all()
+    queryset = Announcement.objects.all().order_by("-created_at")
     serializer_class = AnnouncementSerializer
-    permission_classes = [IsAdminOrReadOnly]   # 👈 THIS is the key lin
+    permission_classes = [IsAdminOrReadOnly]   # ✅ BETTER THAN AllowAny
 
 
-
-
+# 📂 Categories
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [IsAdminOrReadOnly]   # ✅ Protect writes
 
 
-
-
-
+# 💬 Comments (ONLY logged-in users)
 class CommentCreateView(generics.CreateAPIView):
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticated]

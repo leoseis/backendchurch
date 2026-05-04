@@ -1,15 +1,12 @@
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from django.urls import path
-from .views import CategoryViewSet, AnnouncementListCreateView, AnnouncementDetailView,CommentCreateView
+from .views import AnnouncementViewSet, CategoryViewSet, CommentCreateView
 
 router = DefaultRouter()
-router.register(r'categories', CategoryViewSet)
+router.register('announcements', AnnouncementViewSet)
+router.register('categories', CategoryViewSet)
 
 urlpatterns = [
-    path('announcements/', AnnouncementListCreateView.as_view()),
-    path('announcements/<int:pk>/', AnnouncementDetailView.as_view()),
-     path('comments/', CommentCreateView.as_view(), name='create-comment'),
+    path('', include(router.urls)),
+    path('comments/', CommentCreateView.as_view()),
 ]
-
-# 🔥 THIS LINE IS VERY IMPORTANT
-urlpatterns += router.urls
