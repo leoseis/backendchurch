@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.functions import Lower
 from django.conf import settings
 
+
 User = settings.AUTH_USER_MODEL
 
 
@@ -16,29 +17,51 @@ class Category(models.Model):
             )
         ]
 
+    def __str__(self):
+        return self.name
+
+from django.contrib.auth.models import User
 
 class Announcement(models.Model):
     title = models.CharField(max_length=255)
+
     body = models.TextField()
 
-    # ✅ THIS IS THE CORRECT FIELD
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
+        related_name="announcements"
     )
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
-    image = models.ImageField(upload_to="announcements/", blank=True, null=True)
+    image = models.ImageField(
+        upload_to="announcements/",
+        blank=True,
+        null=True
+    )
 
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+
+    likes = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        related_name="liked_announcements"
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    is_active = models.BooleanField(
+        default=True
+    )
 
     def __str__(self):
         return self.title
-    
-
 
 class Comment(models.Model):
     announcement = models.ForeignKey(

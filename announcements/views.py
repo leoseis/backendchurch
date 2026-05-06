@@ -3,6 +3,9 @@ from rest_framework.permissions import BasePermission, SAFE_METHODS, AllowAny
 from rest_framework import generics, permissions
 from .models import Announcement, Category, Comment
 from .serializers import AnnouncementSerializer, CategorySerializer, CommentSerializer
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 
 # 🔐 Custom Permission (BEST PRACTICE)
@@ -22,6 +25,22 @@ class AnnouncementViewSet(ModelViewSet):
     serializer_class = AnnouncementSerializer
     permission_classes = [IsAdminOrReadOnly]   # ✅ BETTER THAN AllowAny
 
+
+@action(detail=True, methods=["post"], permission_classes=[IsAuthenticated])
+def like(self, request, pk=None):
+    announcement = self.get_object()
+
+    if announcement.likes.filter(id=request.user.id).exists():
+        announcement.likes.remove(request.user)
+        liked = False
+    else:
+        announcement.likes.add(request.user)
+        liked = True
+
+    return Response({
+        "liked": liked,
+        "likes_count": announcement.likes.count()
+    })
 
 # 📂 Categories
 class CategoryViewSet(ModelViewSet):
