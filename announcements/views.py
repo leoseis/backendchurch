@@ -6,6 +6,9 @@ from .serializers import AnnouncementSerializer, CategorySerializer, CommentSeri
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
+
+
 
 
 # 🔐 Custom Permission (BEST PRACTICE)
@@ -56,3 +59,31 @@ class CommentCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+
+
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def like_announcement(request, pk):
+    try:
+        announcement = Announcement.objects.get(pk=pk)
+
+        if request.user in announcement.likes.all():
+            announcement.likes.remove(request.user)
+            liked = False
+        else:
+            announcement.likes.add(request.user)
+            liked = True
+
+        return Response({
+            "liked": liked,
+            "likes_count": announcement.likes.count()
+        })
+
+    except Announcement.DoesNotExist:
+        return Response(
+            {"error": "Announcement not found"},
+            status=404
+        )

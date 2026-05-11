@@ -17,29 +17,28 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class AnnouncementSerializer(serializers.ModelSerializer):
-    comments = CommentSerializer(many=True, read_only=True)
-
-    category = serializers.SerializerMethodField()
+    comments = CommentSerializer(
+        many=True,
+        read_only=True
+    )
 
     likes_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Announcement
+
         fields = [
             "id",
             "title",
             "body",
             "image",
-            "created_at",
             "category",
+            "created_at",
+            "is_active",
+            "author",
             "comments",
             "likes_count",
         ]
-
-    def get_category(self, obj):
-        if obj.category:
-            return obj.category.name
-        return None
 
     def get_likes_count(self, obj):
         return obj.likes.count()
