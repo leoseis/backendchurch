@@ -26,7 +26,7 @@ class IsAdminOrReadOnly(BasePermission):
 class AnnouncementViewSet(ModelViewSet):
     queryset = Announcement.objects.all().order_by("-created_at")
     serializer_class = AnnouncementSerializer
-    permission_classes = [IsAdminOrReadOnly]   # ✅ BETTER THAN AllowAny
+    permission_classes = [IsAdminOrReadOnly]
 
 
 @action(detail=True, methods=["post"], permission_classes=[IsAuthenticated])
