@@ -27,18 +27,7 @@ class AnnouncementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Announcement
 
-        fields = [
-            "id",
-            "title",
-            "body",
-            "image",
-            "category",
-            "created_at",
-            "is_active",
-            "author",
-            "comments",
-            "likes_count",
-        ]
+        fields = "__all__"
 
     def get_likes_count(self, obj):
         return obj.likes.count()
