@@ -31,7 +31,24 @@ class IsAdminOrReadOnly(BasePermission):
 # ANNOUNCEMENTS
 # =========================
 class AnnouncementViewSet(ModelViewSet):
+
     queryset = Announcement.objects.all().order_by("-created_at")
+
+    serializer_class = AnnouncementSerializer
+
+    permission_classes = [IsAdminOrReadOnly]
+
+
+    def get_queryset(self):
+
+        queryset = Announcement.objects.all().order_by("-created_at")
+
+        category = self.request.query_params.get("category")
+
+        if category:
+            queryset = queryset.filter(category__name=category)
+
+        return queryset
     serializer_class = AnnouncementSerializer
     permission_classes = [IsAdminOrReadOnly]
 
