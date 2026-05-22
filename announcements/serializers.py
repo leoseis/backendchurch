@@ -17,6 +17,9 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class AnnouncementSerializer(serializers.ModelSerializer):
+
+    category = CategorySerializer(read_only=True)
+
     comments = CommentSerializer(
         many=True,
         read_only=True
@@ -26,7 +29,6 @@ class AnnouncementSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Announcement
-
         fields = "__all__"
 
     def get_likes_count(self, obj):
