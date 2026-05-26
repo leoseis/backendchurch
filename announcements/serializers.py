@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Announcement, Category, Comment
+from .models import Announcement, Category, Comment, Sermon
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -33,3 +33,12 @@ class AnnouncementSerializer(serializers.ModelSerializer):
 
     def get_likes_count(self, obj):
         return obj.likes.count()
+    
+
+
+
+class SermonSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Sermon
+        fields = "__all__"

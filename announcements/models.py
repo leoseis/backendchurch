@@ -82,3 +82,27 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.author} - {self.announcement.title}"
+    
+
+
+
+
+class Sermon(models.Model):
+    title = models.CharField(max_length=255)
+
+    pastor = models.CharField(
+        max_length=255
+    )
+
+    thumbnail = models.ImageField(
+        upload_to="sermons/"
+    )
+
+    youtube_link = models.URLField()
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return self.title

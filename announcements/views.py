@@ -1,4 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
+from .models import Sermon
+from .serializers import SermonSerializer
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 from rest_framework import generics, permissions
 from .models import Announcement, Category, Comment
@@ -96,3 +98,16 @@ class CommentCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+
+
+
+class SermonViewSet(ModelViewSet):
+
+    queryset = Sermon.objects.all().order_by(
+        "-created_at"
+    )
+
+    serializer_class = SermonSerializer
+
+    permission_classes = [IsAdminOrReadOnly]
