@@ -13,6 +13,8 @@ from .serializers import (
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from .models import PrayerRequest
+from .serializers import PrayerRequestSerializer
 
 from rest_framework.permissions import (
     AllowAny,
@@ -111,5 +113,19 @@ class SermonViewSet(ModelViewSet):
     )
 
     serializer_class = SermonSerializer
+
+    permission_classes = [AllowAny]
+
+
+
+class PrayerRequestViewSet(
+    ModelViewSet
+):
+
+    queryset = PrayerRequest.objects.all().order_by(
+        "-created_at"
+    )
+
+    serializer_class = PrayerRequestSerializer
 
     permission_classes = [AllowAny]

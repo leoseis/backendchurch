@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Announcement, Category,Comment, Sermon
+from .models import Announcement, Category,Comment, PrayerRequest, Sermon
 
 
 @admin.register(Announcement)
@@ -10,3 +10,5 @@ class AnnouncementAdmin(admin.ModelAdmin):
 admin.site.register(Category)
 admin.site.register(Comment)
 admin.site.register(Sermon)
+
+admin.site.register(PrayerRequest)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Announcement, Category, Comment, Sermon
+from .models import Announcement, Category, Comment, PrayerRequest, Sermon
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -41,4 +41,14 @@ class SermonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sermon
+        fields = "__all__"
+
+
+
+class PrayerRequestSerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+        model = PrayerRequest
         fields = "__all__"

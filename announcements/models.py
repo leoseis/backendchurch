@@ -106,3 +106,29 @@ class Sermon(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class PrayerRequest(models.Model):
+
+    name = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
+
+    request = models.TextField()
+
+    is_anonymous = models.BooleanField(
+        default=False
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+
+        if self.is_anonymous:
+            return "Anonymous Prayer"
+
+        return self.name or "Prayer Request"

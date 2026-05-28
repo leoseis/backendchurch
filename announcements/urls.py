@@ -7,6 +7,7 @@ from .views import (
     CategoryViewSet,
     CommentCreateView,
     SermonViewSet,
+    PrayerRequestViewSet,
 )
 
 router = DefaultRouter()
@@ -29,12 +30,15 @@ router.register(
     SermonViewSet
 )
 
+# PRAYERS
+router.register(
+    r'prayers',
+    PrayerRequestViewSet
+)
+
 urlpatterns = [
 
-    path(
-        '',
-        include(router.urls)
-    ),
+    path('', include(router.urls)),
 
     path(
         'comments/create/',
