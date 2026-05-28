@@ -14,6 +14,10 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+)
 
 # =========================
 # CUSTOM PERMISSION
@@ -100,8 +104,6 @@ class CommentCreateView(generics.CreateAPIView):
         serializer.save(author=self.request.user)
 
 
-
-
 class SermonViewSet(ModelViewSet):
 
     queryset = Sermon.objects.all().order_by(
@@ -110,4 +112,4 @@ class SermonViewSet(ModelViewSet):
 
     serializer_class = SermonSerializer
 
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [AllowAny]
