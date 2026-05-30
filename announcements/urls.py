@@ -8,6 +8,8 @@ from .views import (
     CommentCreateView,
     SermonViewSet,
     PrayerRequestViewSet,
+    EventViewSet,
+    EventRegistrationViewSet,
 )
 
 router = DefaultRouter()
@@ -36,9 +38,24 @@ router.register(
     PrayerRequestViewSet
 )
 
+# EVENTS
+router.register(
+    r'events',
+    EventViewSet
+)
+
+# EVENT REGISTRATIONS
+router.register(
+    r'event-registrations',
+    EventRegistrationViewSet
+)
+
 urlpatterns = [
 
-    path('', include(router.urls)),
+    path(
+        '',
+        include(router.urls)
+    ),
 
     path(
         'comments/create/',

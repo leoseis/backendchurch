@@ -9,6 +9,16 @@ from .serializers import (
     CategorySerializer,
     CommentSerializer,
 )
+from .models import (
+    Event,
+    EventRegistration,
+)
+
+from .serializers import (
+    EventSerializer,
+    EventRegistrationSerializer,
+)
+
 
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -129,3 +139,17 @@ class PrayerRequestViewSet(
     serializer_class = PrayerRequestSerializer
 
     permission_classes = [AllowAny]
+
+
+
+
+class EventViewSet(ModelViewSet):
+    queryset = Event.objects.all().order_by("event_date")
+
+    serializer_class = EventSerializer
+
+
+class EventRegistrationViewSet(ModelViewSet):
+    queryset = EventRegistration.objects.all()
+
+    serializer_class = EventRegistrationSerializer

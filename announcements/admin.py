@@ -12,3 +12,10 @@ admin.site.register(Comment)
 admin.site.register(Sermon)
 
 admin.site.register(PrayerRequest)
+from .models import (
+    Event,
+    EventRegistration,
+)
+
+admin.site.register(Event)
+admin.site.register(EventRegistration)
