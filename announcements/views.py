@@ -3,11 +3,15 @@ from .models import Sermon
 from .serializers import SermonSerializer
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 from rest_framework import generics, permissions
-from .models import Announcement, Category, Comment
+from .models import Announcement, Category, Comment, DailyDevotional
+from .models import DailyDevotional
+from .serializers import DailyDevotionalSerializer
+from rest_framework.permissions import AllowAny
 from .serializers import (
     AnnouncementSerializer,
     CategorySerializer,
     CommentSerializer,
+    DailyDevotionalSerializer
 )
 from .models import (
     Event,
@@ -153,3 +157,19 @@ class EventRegistrationViewSet(ModelViewSet):
     queryset = EventRegistration.objects.all()
 
     serializer_class = EventRegistrationSerializer
+
+
+
+class DailyDevotionalViewSet(
+    ModelViewSet
+):
+
+    queryset = DailyDevotional.objects.all().order_by(
+        "-devotional_date"
+    )
+
+    serializer_class = (
+        DailyDevotionalSerializer
+    )
+
+    permission_classes = [AllowAny]

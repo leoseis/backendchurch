@@ -179,3 +179,26 @@ class EventRegistration(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.event.title}"
+    
+
+class DailyDevotional(models.Model):
+    title = models.CharField(max_length=255)
+
+    bible_verse = models.CharField(
+        max_length=255
+    )
+
+    scripture_text = models.TextField()
+
+    message = models.TextField()
+
+    prayer = models.TextField()
+
+    devotional_date = models.DateField()
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return self.title

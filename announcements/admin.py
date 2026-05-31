@@ -1,5 +1,8 @@
 from django.contrib import admin
 from .models import Announcement, Category,Comment, PrayerRequest, Sermon
+from .models import DailyDevotional
+
+admin.site.register(DailyDevotional)
 
 
 @admin.register(Announcement)
