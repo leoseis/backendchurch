@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from .models import Sermon
-from .serializers import SermonSerializer
+from .serializers import GivingAccountSerializer, SermonSerializer
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 from rest_framework import generics, permissions
 from .models import Announcement, Category, Comment, DailyDevotional
@@ -16,6 +16,7 @@ from .serializers import (
 from .models import (
     Event,
     EventRegistration,
+    GivingAccount,
 )
 
 from .serializers import (
@@ -173,3 +174,10 @@ class DailyDevotionalViewSet(
     )
 
     permission_classes = [AllowAny]
+
+
+
+class GivingAccountViewSet(ModelViewSet):
+    queryset = GivingAccount.objects.all()
+    serializer_class = GivingAccountSerializer
+    permission_classes = [IsAdminOrReadOnly]

@@ -7,6 +7,7 @@ from .views import (
     CategoryViewSet,
     CommentCreateView,
     DailyDevotionalViewSet,
+    GivingAccountViewSet,
     SermonViewSet,
     PrayerRequestViewSet,
     EventViewSet,
@@ -55,6 +56,12 @@ router.register(
 router.register(
     r'devotionals',
     DailyDevotionalViewSet
+
+)
+
+router.register(
+    r"giving",
+    GivingAccountViewSet
 )
 
 urlpatterns = [
@@ -70,3 +77,4 @@ urlpatterns = [
         name='comment-create'
     ),
 ]
+

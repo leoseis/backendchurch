@@ -18,7 +18,19 @@ admin.site.register(PrayerRequest)
 from .models import (
     Event,
     EventRegistration,
+
 )
 
 admin.site.register(Event)
 admin.site.register(EventRegistration)
+
+
+from .models import GivingAccount
+
+@admin.register(GivingAccount)
+class GivingAccountAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "bank_name",
+        "account_number",
+    )

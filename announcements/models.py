@@ -202,3 +202,21 @@ class DailyDevotional(models.Model):
 
     def __str__(self):
         return self.title
+
+
+
+class GivingAccount(models.Model):
+    title = models.CharField(max_length=100)
+
+    bank_name = models.CharField(max_length=100)
+
+    account_name = models.CharField(max_length=200)
+
+    account_number = models.CharField(max_length=30)
+
+    description = models.TextField(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
