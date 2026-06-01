@@ -12,6 +12,7 @@ from .views import (
     PrayerRequestViewSet,
     EventViewSet,
     EventRegistrationViewSet,
+    TestimonyViewSet,
 )
 
 router = DefaultRouter()
@@ -58,7 +59,10 @@ router.register(
     DailyDevotionalViewSet
 
 )
-
+router.register(
+    r"testimonies",
+    TestimonyViewSet
+)
 router.register(
     r"giving",
     GivingAccountViewSet

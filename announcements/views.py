@@ -7,6 +7,8 @@ from .models import Announcement, Category, Comment, DailyDevotional
 from .models import DailyDevotional
 from .serializers import DailyDevotionalSerializer
 from rest_framework.permissions import AllowAny
+from .models import Testimony
+from .serializers import TestimonySerializer
 from .serializers import (
     AnnouncementSerializer,
     CategorySerializer,
@@ -181,3 +183,25 @@ class GivingAccountViewSet(ModelViewSet):
     queryset = GivingAccount.objects.all()
     serializer_class = GivingAccountSerializer
     permission_classes = [IsAdminOrReadOnly]
+
+
+
+class TestimonyViewSet(
+    ModelViewSet
+):
+
+    queryset = Testimony.objects.all().order_by(
+        "-created_at"
+    )
+
+    serializer_class = (
+        TestimonySerializer
+    )
+
+    permission_classes = [AllowAny]
+
+
+
+
+
+

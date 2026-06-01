@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Announcement, Category, Comment, DailyDevotional, GivingAccount, PrayerRequest, Sermon
+from .models import Announcement, Category, Comment, DailyDevotional, GivingAccount, PrayerRequest, Sermon, Testimony
 from .models import (
     Event,
     EventRegistration,
@@ -86,4 +86,14 @@ class DailyDevotionalSerializer(
 class GivingAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = GivingAccount
+        fields = "__all__"
+
+
+
+class TestimonySerializer(
+    serializers.ModelSerializer
+):
+
+    class Meta:
+        model = Testimony
         fields = "__all__"
