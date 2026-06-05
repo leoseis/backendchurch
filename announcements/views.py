@@ -20,11 +20,13 @@ from .models import (
     EventRegistration,
     GivingAccount,
     Gallery,
+    LiveStream,
 )
 
 from .serializers import (
     EventSerializer,
     EventRegistrationSerializer,
+    LiveStreamSerializer,
 )
 
 
@@ -211,6 +213,22 @@ class GalleryViewSet(
     queryset = Gallery.objects.all()
 
     serializer_class = GallerySerializer
+
+    permission_classes = [
+        IsAdminOrReadOnly
+    ]
+
+
+
+
+class LiveStreamViewSet(
+    viewsets.ModelViewSet
+):
+    queryset = LiveStream.objects.all()
+
+    serializer_class = (
+        LiveStreamSerializer
+    )
 
     permission_classes = [
         IsAdminOrReadOnly

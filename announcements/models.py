@@ -263,3 +263,22 @@ class Gallery(models.Model):
 
     def __str__(self):
         return self.title
+
+
+
+
+class LiveStream(models.Model):
+    title = models.CharField(max_length=255)
+
+    youtube_url = models.URLField()
+
+    is_live = models.BooleanField(
+        default=False
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return self.title

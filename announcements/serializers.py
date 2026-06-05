@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Announcement, Category, Comment, DailyDevotional, GivingAccount, PrayerRequest, Sermon, Testimony, Gallery
+from .models import Announcement, Category, Comment, DailyDevotional, GivingAccount, LiveStream, PrayerRequest, Sermon, Testimony, Gallery
 from .models import (
     Event,
     EventRegistration,
@@ -121,3 +121,12 @@ class GallerySerializer(
             )
 
         return None
+    
+
+
+class LiveStreamSerializer(
+    serializers.ModelSerializer
+):
+    class Meta:
+        model = LiveStream
+        fields = "__all__"  
