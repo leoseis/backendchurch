@@ -1,8 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
 from .models import Sermon
-from .serializers import GivingAccountSerializer, SermonSerializer
+from .serializers import GallerySerializer, GivingAccountSerializer, SermonSerializer
 from rest_framework.permissions import BasePermission, SAFE_METHODS
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, viewsets
 from .models import Announcement, Category, Comment, DailyDevotional
 from .models import DailyDevotional
 from .serializers import DailyDevotionalSerializer
@@ -19,6 +19,7 @@ from .models import (
     Event,
     EventRegistration,
     GivingAccount,
+    Gallery,
 )
 
 from .serializers import (
@@ -199,6 +200,21 @@ class TestimonyViewSet(
     )
 
     permission_classes = [AllowAny]
+
+
+
+
+
+class GalleryViewSet(
+    viewsets.ModelViewSet
+):
+    queryset = Gallery.objects.all()
+
+    serializer_class = GallerySerializer
+
+    permission_classes = [
+        IsAdminOrReadOnly
+    ]
 
 
 

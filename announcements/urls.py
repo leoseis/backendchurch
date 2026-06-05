@@ -7,6 +7,7 @@ from .views import (
     CategoryViewSet,
     CommentCreateView,
     DailyDevotionalViewSet,
+    GalleryViewSet,
     GivingAccountViewSet,
     SermonViewSet,
     PrayerRequestViewSet,
@@ -45,6 +46,11 @@ router.register(
 router.register(
     r'events',
     EventViewSet
+)
+
+router.register(
+    r"gallery",
+    GalleryViewSet
 )
 
 # EVENT REGISTRATIONS
