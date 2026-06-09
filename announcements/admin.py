@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Announcement, Category,Comment, Gallery, LiveStream, PrayerRequest, Sermon, Testimony
+from .models import Announcement, BibleReadingPlan, Category,Comment, Gallery, LiveStream, PrayerRequest, Sermon, Testimony
 from .models import DailyDevotional
 
 admin.site.register(DailyDevotional)
@@ -24,6 +24,7 @@ from .models import (
 admin.site.register(Event)
 admin.site.register(Gallery)
 admin.site.register(EventRegistration)
+admin.site.register(BibleReadingPlan)
 
 
 

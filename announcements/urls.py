@@ -4,6 +4,7 @@ from rest_framework.routers import DefaultRouter
 
 from .views import (
     AnnouncementViewSet,
+    BibleReadingPlanViewSet,
     CategoryViewSet,
     CommentCreateView,
     DailyDevotionalViewSet,
@@ -47,6 +48,10 @@ router.register(
 router.register(
     r'events',
     EventViewSet
+)
+router.register(
+    r"reading-plans",
+    BibleReadingPlanViewSet
 )
 
 router.register(

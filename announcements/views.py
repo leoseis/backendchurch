@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from .models import Sermon
-from .serializers import GallerySerializer, GivingAccountSerializer, SermonSerializer
+from .models import BibleReadingPlan, Sermon
+from .serializers import BibleReadingPlanSerializer, GallerySerializer, GivingAccountSerializer, SermonSerializer
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 from rest_framework import generics, permissions, viewsets
 from .models import Announcement, Category, Comment, DailyDevotional
@@ -233,6 +233,22 @@ class LiveStreamViewSet(
     permission_classes = [
         IsAdminOrReadOnly
     ]
+
+
+
+class BibleReadingPlanViewSet(
+    viewsets.ModelViewSet
+):
+    queryset = (
+    BibleReadingPlan.objects.all()
+        .order_by("reading_date")
+    )
+
+    serializer_class = (
+    BibleReadingPlanSerializer
+    )
+
+    permission_classes = [AllowAny]
 
 
 

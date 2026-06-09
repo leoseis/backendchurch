@@ -282,3 +282,22 @@ class LiveStream(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class BibleReadingPlan(models.Model):
+    title = models.CharField(
+        max_length=255
+    )
+
+    scripture = models.CharField(
+        max_length=255
+    )
+
+    reading_date = models.DateField()
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return self.title
