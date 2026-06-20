@@ -301,3 +301,20 @@ class BibleReadingPlan(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+
+class ServiceSchedule(models.Model):
+    title = models.CharField(max_length=100)
+
+    day = models.CharField(max_length=50)
+
+    time = models.CharField(max_length=50)
+
+    description = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return f"{self.title} - {self.day}"

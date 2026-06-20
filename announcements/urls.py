@@ -1,5 +1,6 @@
 from django.urls import path, include
 
+
 from rest_framework.routers import DefaultRouter
 
 from .views import (
@@ -16,6 +17,7 @@ from .views import (
     EventViewSet,
     EventRegistrationViewSet,
     TestimonyViewSet,
+    ServiceScheduleViewSet,
 )
 
 router = DefaultRouter()
@@ -78,6 +80,10 @@ router.register(
 router.register(
     r"giving",
     GivingAccountViewSet
+)
+router.register(
+    r"schedules",
+    ServiceScheduleViewSet
 )
 
 router.register(

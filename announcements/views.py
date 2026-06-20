@@ -9,6 +9,11 @@ from .serializers import DailyDevotionalSerializer
 from rest_framework.permissions import AllowAny
 from .models import Testimony
 from .serializers import TestimonySerializer
+from .models import ServiceSchedule
+
+from .serializers import (
+    ServiceScheduleSerializer
+)
 from .serializers import (
     AnnouncementSerializer,
     CategorySerializer,
@@ -249,6 +254,19 @@ class BibleReadingPlanViewSet(
     )
 
     permission_classes = [AllowAny]
+
+
+
+class ServiceScheduleViewSet(
+    viewsets.ModelViewSet
+):
+    queryset = (
+        ServiceSchedule.objects.all()
+    )
+
+    serializer_class = (
+        ServiceScheduleSerializer
+    )
 
 
 
