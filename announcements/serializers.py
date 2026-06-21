@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Announcement, BibleReadingPlan, Category, Comment, DailyDevotional, GivingAccount, LiveStream, PrayerRequest, Sermon, Testimony, Gallery
+from .models import Announcement, BibleReadingPlan, Category, ChurchBranch, Comment, DailyDevotional, GivingAccount, LiveStream, PrayerRequest, Sermon, Testimony, Gallery
 from .models import ServiceSchedule
 class ServiceScheduleSerializer(
     serializers.ModelSerializer
@@ -148,4 +148,17 @@ class BibleReadingPlanSerializer(
 ):
     class Meta:
         model = BibleReadingPlan
+        fields = "__all__"
+
+
+
+
+
+
+class ChurchBranchSerializer(
+    serializers.ModelSerializer
+):
+    class Meta:
+        model = ChurchBranch
+
         fields = "__all__"

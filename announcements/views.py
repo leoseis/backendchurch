@@ -7,8 +7,8 @@ from .models import Announcement, Category, Comment, DailyDevotional
 from .models import DailyDevotional
 from .serializers import DailyDevotionalSerializer
 from rest_framework.permissions import AllowAny
-from .models import Testimony
-from .serializers import TestimonySerializer
+from .models import Testimony, ChurchBranch
+from .serializers import TestimonySerializer, ChurchBranchSerializer
 from .models import ServiceSchedule
 
 from .serializers import (
@@ -268,6 +268,14 @@ class ServiceScheduleViewSet(
         ServiceScheduleSerializer
     )
 
+class ChurchBranchViewSet(
+    viewsets.ModelViewSet
+):
+    queryset = ChurchBranch.objects.all()
+
+    serializer_class = (
+        ChurchBranchSerializer
+    )
 
 
 

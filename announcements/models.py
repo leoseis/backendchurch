@@ -318,3 +318,37 @@ class ServiceSchedule(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.day}"
+    
+
+
+
+class ChurchBranch(models.Model):
+    name = models.CharField(max_length=200)
+
+    pastor = models.CharField(
+        max_length=100
+    )
+
+    address = models.TextField()
+
+    phone = models.CharField(
+        max_length=30,
+        blank=True,
+        null=True
+    )
+
+    map_link = models.URLField(
+        blank=True,
+        null=True
+    )
+
+    image = models.ImageField(
+        upload_to="branches/",
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return self.name
+    
+    
