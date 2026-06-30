@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from .models import BibleReadingPlan, Sermon
-from .serializers import BibleReadingPlanSerializer, GallerySerializer, GivingAccountSerializer, SermonSerializer
+from .serializers import BibleReadingPlanSerializer, GallerySerializer, GivingAccountSerializer, LiveServiceSerializer, SermonSerializer
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 from rest_framework import generics, permissions, viewsets
 from .models import Announcement, Category, Comment, DailyDevotional
@@ -26,6 +26,7 @@ from .models import (
     GivingAccount,
     Gallery,
     LiveStream,
+    LiveService,
 )
 
 from .serializers import (
@@ -238,6 +239,12 @@ class LiveStreamViewSet(
     permission_classes = [
         IsAdminOrReadOnly
     ]
+
+
+
+class LiveServiceViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = LiveService.objects.filter(is_live=True)
+    serializer_class = LiveServiceSerializer
 
 
 

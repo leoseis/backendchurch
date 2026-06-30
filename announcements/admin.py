@@ -40,3 +40,9 @@ class GivingAccountAdmin(admin.ModelAdmin):
         "bank_name",
         "account_number",
     )
+
+from .models import LiveService
+
+@admin.register(LiveService)
+class LiveServiceAdmin(admin.ModelAdmin):
+    list_display = ("title", "is_live")

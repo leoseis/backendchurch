@@ -12,6 +12,7 @@ from .views import (
     DailyDevotionalViewSet,
     GalleryViewSet,
     GivingAccountViewSet,
+    LiveServiceViewSet,
     LiveStreamViewSet,
     SermonViewSet,
     PrayerRequestViewSet,
@@ -96,6 +97,8 @@ router.register(
     r"branches",
     ChurchBranchViewSet
 )
+
+router.register("live-service", LiveServiceViewSet)
 
 urlpatterns = [
 
