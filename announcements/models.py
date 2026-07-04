@@ -93,20 +93,50 @@ class Sermon(models.Model):
     pastor = models.CharField(
         max_length=255
     )
+    scripture = models.CharField(
+    max_length=255,
+    blank=True,
+    null=True
+)
+    description = models.TextField(
+    blank=True,
+    null=True
+)
+    description = models.TextField(
+    blank=True,
+    null=True,
+)
 
     thumbnail = models.ImageField(
         upload_to="sermons/"
     )
 
-    youtube_link = models.URLField()
+    youtube_link = models.URLField(
+        blank=True,
+        null=True
+    )
 
+    audio_url = models.URLField(
+        blank=True,
+        null=True
+    )
+
+    pdf_notes = models.FileField(
+        upload_to="sermons/",
+        blank=True,
+        null=True
+    )
+
+    sermon_date = models.DateField(
+    blank=True,
+    null=True
+)
     created_at = models.DateTimeField(
         auto_now_add=True
     )
 
     def __str__(self):
         return self.title
-    
 
 class PrayerRequest(models.Model):
 
@@ -358,5 +388,26 @@ class ChurchBranch(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+
+class Devotional(models.Model):
+    title = models.CharField(max_length=200)
+
+    scripture = models.CharField(max_length=150)
+
+    content = models.TextField()
+
+    prayer = models.TextField(blank=True)
+
+    date = models.DateField(unique=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-date"]
+
+    def __str__(self):
+        return f"{self.date} - {self.title}"
     
     

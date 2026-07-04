@@ -1,15 +1,20 @@
 from rest_framework.viewsets import ModelViewSet
 from .models import BibleReadingPlan, Sermon
-from .serializers import BibleReadingPlanSerializer, GallerySerializer, GivingAccountSerializer, LiveServiceSerializer, SermonSerializer
+from .serializers import BibleReadingPlanSerializer, DevotionalSerializer, GallerySerializer, GivingAccountSerializer, LiveServiceSerializer, SermonSerializer
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 from rest_framework import generics, permissions, viewsets
 from .models import Announcement, Category, Comment, DailyDevotional
-from .models import DailyDevotional
 from .serializers import DailyDevotionalSerializer
 from rest_framework.permissions import AllowAny
 from .models import Testimony, ChurchBranch
 from .serializers import TestimonySerializer, ChurchBranchSerializer
 from .models import ServiceSchedule
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from .models import PrayerRequest
+from .serializers import PrayerRequestSerializer
+from .models import DailyDevotional
 
 from .serializers import (
     ServiceScheduleSerializer
@@ -36,14 +41,9 @@ from .serializers import (
 )
 
 
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-from .models import PrayerRequest
-from .serializers import PrayerRequestSerializer
+
 
 from rest_framework.permissions import (
-    AllowAny,
     IsAuthenticated,
 )
 
@@ -283,8 +283,5 @@ class ChurchBranchViewSet(
     serializer_class = (
         ChurchBranchSerializer
     )
-
-
-
 
 

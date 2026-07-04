@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Announcement, BibleReadingPlan, Category, ChurchBranch,Comment, Gallery, LiveStream, PrayerRequest, Sermon, Testimony
 from .models import DailyDevotional
 from .models import ServiceSchedule
-
+from .models import Devotional
 
 
 @admin.register(Announcement)
@@ -46,3 +46,23 @@ from .models import LiveService
 @admin.register(LiveService)
 class LiveServiceAdmin(admin.ModelAdmin):
     list_display = ("title", "is_live")
+
+    
+
+
+
+
+@admin.register(Devotional)
+class DevotionalAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "scripture",
+        "date",
+    )
+
+    search_fields = (
+        "title",
+        "scripture",
+    )
+
+    list_filter = ("date",)
