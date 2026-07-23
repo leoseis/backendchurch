@@ -26,10 +26,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "email",
-        ]
-        read_only_fields = [
-            "id",
-            "username",
+            "phone_number",
+            "profile_picture",
         ]
 
     def update(self, instance, validated_data):
