@@ -30,25 +30,35 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "profile_picture",
         ]
 
-    def update(self, instance, validated_data):
-     instance.first_name = validated_data.get(
+def update(self, instance, validated_data):
+
+    instance.first_name = validated_data.get(
         "first_name",
         instance.first_name,
     )
 
-     instance.last_name = validated_data.get(
+    instance.last_name = validated_data.get(
         "last_name",
         instance.last_name,
     )
 
-     instance.email = validated_data.get(
+    instance.email = validated_data.get(
         "email",
         instance.email,
     )
 
-     instance.save()
+    instance.phone_number = validated_data.get(
+        "phone_number",
+        instance.phone_number,
+    )
 
-     return instance
+    instance.profile_picture = validated_data.get(
+        "profile_picture",
+        instance.profile_picture,
+    )
 
+    instance.save()
+
+    return instance
 
         
