@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 
-from .serializers import UserProfileSerializer
+from .serializers import ( UserProfileSerializer,ChangePasswordSerializer,)
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
@@ -67,3 +67,40 @@ class ProfileView(APIView):
             return Response(serializer.data)
 
         return Response(serializer.errors, status=400)
+
+
+
+
+
+from django.contrib.auth import update_session_auth_hash
+
+
+class ChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        serializer = ChangePasswordSerializer(data=request.data)
+
+        if serializer.is_valid():
+            user = request.user
+
+            old_password = serializer.validated_data["old_password"]
+            new_password = serializer.validated_data["new_password"]
+
+            if not user.check_password(old_password):
+                return Response(
+                    {"old_password": ["Wrong password."]},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            user.set_password(new_password)
+            user.save()
+
+            update_session_auth_hash(request, user)
+
+            return Response(
+                {"message": "Password updated successfully."},
+                status=status.HTTP_200_OK,
+            )
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
