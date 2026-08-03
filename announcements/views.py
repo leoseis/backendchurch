@@ -16,6 +16,7 @@ from .models import PrayerRequest
 from .serializers import PrayerRequestSerializer
 from .models import DailyDevotional
 
+
 from .serializers import (
     ServiceScheduleSerializer
 )
@@ -67,14 +68,12 @@ class IsAdminOrReadOnly(BasePermission):
 class AnnouncementViewSet(ModelViewSet):
 
     queryset = Announcement.objects.all().order_by("-created_at")
-
     serializer_class = AnnouncementSerializer
-
     permission_classes = [IsAdminOrReadOnly]
 
+    
 
     def get_queryset(self):
-
         queryset = Announcement.objects.all().order_by("-created_at")
 
         category = self.request.query_params.get("category")
@@ -83,10 +82,7 @@ class AnnouncementViewSet(ModelViewSet):
             queryset = queryset.filter(category__name=category)
 
         return queryset
-    serializer_class = AnnouncementSerializer
-    permission_classes = [IsAdminOrReadOnly]
 
-    # ✅ LIKE SYSTEM
     @action(
         detail=True,
         methods=["post"],
@@ -144,9 +140,7 @@ class SermonViewSet(ModelViewSet):
 
 
 
-class PrayerRequestViewSet(
-    ModelViewSet
-):
+class PrayerRequestViewSet(ModelViewSet):
 
     queryset = PrayerRequest.objects.all().order_by(
         "-created_at"
@@ -155,6 +149,7 @@ class PrayerRequestViewSet(
     serializer_class = PrayerRequestSerializer
 
     permission_classes = [AllowAny]
+    
 
 
 
