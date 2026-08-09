@@ -6,7 +6,7 @@ from .models import DeviceToken
 EXPO_PUSH_URL = "https://exp.host/--/api/v2/push/send"
 
 
-def send_push_notification(title, body):
+def send_push_notification(title, body, data=None):
     print("========== PUSH FUNCTION CALLED ==========")
     """
     Send a push notification to all registered devices.
@@ -18,11 +18,12 @@ def send_push_notification(title, body):
 
     for token in device_tokens:
         messages.append({
-            "to": token,
-            "title": title,
-            "body": body,
-            "sound": "default",
-        })
+    "to": token,
+    "title": title,
+    "body": body,
+    "sound": "default",
+    "data": data or {},
+})
 
     if not messages:
         return

@@ -11,4 +11,7 @@ def announcement_created(sender, instance, created, **kwargs):
         send_push_notification(
             title="📢 New Announcement",
             body=instance.title,
+            data={
+                "announcement_id": instance.id,
+            },
         )
