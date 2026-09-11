@@ -182,7 +182,6 @@ STORAGES = {
     },
 }
 
-# Compatibility for django-cloudinary-storage collectstatic command
 
 # --------------------------------------------------
 # DJANGO REST FRAMEWORK
@@ -208,6 +207,25 @@ SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
+
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "django.request": {
+            "handlers": ["console"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+    },
+}
 
 # --------------------------------------------------
 # CUSTOM USER MODEL
