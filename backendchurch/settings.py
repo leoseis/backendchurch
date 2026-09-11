@@ -41,7 +41,6 @@ if RENDER_EXTERNAL_HOSTNAME:
 # --------------------------------------------------
 
 INSTALLED_APPS = [
-    "cloudinary_storage",
     "cloudinary",
 
     "rest_framework",
@@ -174,20 +173,16 @@ CLOUDINARY_STORAGE = {
 
 
 STORAGES = {
-    # Uploaded media files:
-    # announcement images, gallery images,
-    # profile pictures, event banners, etc.
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
 
-    # Django static files:
-    # admin CSS/JS and other static assets.
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 
+# Compatibility for django-cloudinary-storage collectstatic command
 
 # --------------------------------------------------
 # DJANGO REST FRAMEWORK
