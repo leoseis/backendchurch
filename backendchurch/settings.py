@@ -4,6 +4,7 @@ import os
 
 import dj_database_url
 from dotenv import load_dotenv
+import cloudinary
 
 
 # --------------------------------------------------
@@ -13,6 +14,12 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(BASE_DIR / ".env")
+
+
+cloudinary.config(
+    cloudinary_url=os.environ.get("CLOUDINARY_URL"),
+    secure=True,
+)
 
 
 # --------------------------------------------------
@@ -165,11 +172,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # CLOUDINARY MEDIA STORAGE
 # --------------------------------------------------
 
-CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
-    "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
-    "API_SECRET": os.getenv("CLOUDINARY_API_SECRET"),
-}
 
 
 STORAGES = {
